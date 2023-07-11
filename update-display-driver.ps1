@@ -1,5 +1,5 @@
-######################################
-###   Update Nvidia Display Driver ###
+########################################
+###   Update Nvidia Display Driver   ###
 ###############################################################################
 # A Windows PowerShell script to cleanly update your Nvidia display driver,
 #  using Display Driver Uninstaller and Chocolatey.
@@ -16,11 +16,11 @@ function Set-RunOnce($type) {
 
 function Uninstall-DisplayDriver {
     Write-Host 'Cleaning display driver...'
-    & 'C:\ProgramData\chocolatey\lib\ddu\tools\DDU v18.0.6.0\Display Driver Uninstaller.exe' -Silent -NoRestorePoint -PreventWinUpdate -CleanNvidia | Out-Null
+    & 'Display Driver Uninstaller.exe' -Silent -NoRestorePoint -PreventWinUpdate -CleanNvidia | Out-Null
     bcdedit /deletevalue safeboot
     Set-RunOnce
     Set-ItemProperty -Path $ScriptKey -Name UninstallComplete -Value 1
-    Restart-Computer
+    & shutdown /r /t 0
     Exit
 }
 
